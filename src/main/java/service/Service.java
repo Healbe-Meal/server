@@ -1,11 +1,15 @@
 package service;
 
 
-import Parse.*;
-import Parse.HeartRate.EnergyInDescription;
-import Parse.HeartRate.EnergyOutDescription;
-import Parse.HeartRate.HeartRateDescription;
-import Parse.HeartRate.StepsDescription;
+import entities.*;
+import entities.descriptions.EnergyInDescription;
+import entities.descriptions.EnergyOutDescription;
+import entities.descriptions.HeartRateDescription;
+import entities.descriptions.StepsDescription;
+import entities.elements.FullSummaryElem;
+import entities.elements.ShortSummaryElem;
+import entities.elements.SleepDataElem;
+import entities.elements.WeightElem;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -23,10 +27,12 @@ public class Service {
     private double maxHeartRate = -1;
     private double avgHeartRate = 0;
     private double count = 0;
+    private Integer maxSleepTime = 0;
 
     private Integer prevDateDay = 0;
     private String prevTime = "";
     private String prevDateMonth = "";
+    private Integer prevSleepTime = 0;
     private SimpleDateFormat dateFormatter =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
     private SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
@@ -36,25 +42,21 @@ public class Service {
     ResultElem energyBurnedForDay = new ResultElem();
     ResultElem stepsForDay = new ResultElem();
     ResultElem heartRateForDay = new ResultElem();
+    ResultElem sleepTimeForDay = new ResultElem();
     private ForMonth energyIntakeForMonth = new ForMonth();
     private ForMonth energyBurnedForMonth = new ForMonth();
     private ForMonth stepsForMonth = new ForMonth();
     private ForMonth heartRateForMonth = new ForMonth();
+    private ForMonth sleepTimeForMonth = new ForMonth();
     private Result result = new Result();
     private ArrayList<Description> energyInDescription = new ArrayList<>();
     private ArrayList<Description> energyOutDescription = new ArrayList<>();
     private ArrayList<Description> stepsDescription = new ArrayList<>();
     private ArrayList<Description> heartRateDescription = new ArrayList<>();
 
-
-
-    //Map<String, Double> energyConsumedForDay = new HashMap<>();
-
-
-
-
     public Result getFinalJSON(Inf inf) throws IOException, ParseException {
         parseShortSummary(inf.getShort_summary());
+        parseSleepData(inf.getSleep_data());
         //getJSONFromWeight(inf.getWeight());
 
 
@@ -62,8 +64,7 @@ public class Service {
         result.setHeartRate(energyIntakeForMonth.getResultByMonth());
         result.setEnergyOut(stepsForMonth.getResultByMonth());
         result.setSteps(heartRateForMonth.getResultByMonth());
-
-//        //map.put("weight", weightJSON);
+        //map.put("weight", weightJSON);
 
         return result;
     }
@@ -165,6 +166,42 @@ public class Service {
             String time = stringDate.split(" ")[1];
             Integer day = Integer.parseInt(dayFormatter.format(date));
             String month = monthFormatter.format(date);
+        }
+    }
+
+    public void parseSleepData(List<SleepDataElem> sleepData) throws java.text.ParseException {
+
+        int length = sleepData.size();
+        for (int i = 0; i < length; i++) {
+            Integer timeInBed = sleepData.get(i).getTotal_time_in_bed();
+            Integer sleep_quality = sleepData.get(i).getSleep_quality();
+
+            String stringDate = sleepData.get(i).getDt();
+
+            Date date = dateFormatter.parse(stringDate);
+            String time = stringDate.split(" ")[1];
+            Integer day = Integer.parseInt(dayFormatter.format(date));
+            String month = monthFormatter.format(date);
+
+            if (sleep_quality != 0 || i == length - 1 ) {
+                sleepTimeForDay.addElem(day - 1, (double) maxSleepTime);
+
+                if (!prevDateMonth.equals(month) || i == length - 1 ) {
+                    sleepTimeForMonth.addElem(prevDateMonth, sleepTimeForDay);
+
+                    sleepTimeForDay = new ResultElem();
+                }
+
+                maxSleepTime = 0;
+            }
+
+            if (maxSleepTime < timeInBed) {
+                maxSleepTime = timeInBed;
+            }
+
+            prevDateDay = day;
+            prevDateMonth = month;
+            prevSleepTime = timeInBed;
         }
     }
 
