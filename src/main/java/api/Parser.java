@@ -12,8 +12,8 @@ import java.text.ParseException;
 
 @RestController
 public class Parser {
-
-    @PostMapping("/parse")
+    
+    @PostMapping(value = "/parse", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> parse(@RequestBody Inf inf) throws IOException, ParseException {
         Service service = new Service();
         return new ResponseEntity<>(service.getFinalJSON(inf), HttpStatus.OK);
