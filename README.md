@@ -6,5 +6,6 @@
 mvn spring-boot:run
 ```
 
+[Документация](https://github.com/Healbe-Meal/wiki/blob/main/docs/server.md)
 
 Запросы выполнятеся по ссылке [http://localhost:8100](http://localhost:8100/)
