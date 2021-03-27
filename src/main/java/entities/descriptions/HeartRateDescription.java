@@ -1,20 +1,18 @@
 package entities.descriptions;
 
-import entities.Description;
-
 public class HeartRateDescription extends Description {
-    Integer hearRate;
+    Integer y;
 
-    public HeartRateDescription(String time, Integer hearRate) {
-        super(time);
-        this.hearRate = hearRate;
+    public HeartRateDescription(String x, Integer y) {
+        super(x);
+        this.y = y;
     }
 
-    public Integer getHearRate() {
-        return hearRate;
+    public Integer getY() {
+        return y;
     }
 
-    public void setHearRate(Integer hearRate) {
-        this.hearRate = hearRate;
+    public void setY(Integer y) {
+        this.y = y;
     }
 }

@@ -1,4 +1,6 @@
-package entities;
+package entities.response;
+
+import entities.descriptions.Description;
 
 import java.util.ArrayList;
 

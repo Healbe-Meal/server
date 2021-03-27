@@ -3,8 +3,16 @@ package entities.elements;
 public class FullSummaryElem {
     String dt;
     Double pt_in;
-    Double wt_in;
+    Double fat_in;
     Double cbh_in;
+
+    public Double getFat_in() {
+        return fat_in;
+    }
+
+    public void setFat_in(Double fat_in) {
+        this.fat_in = fat_in;
+    }
 
     public String getDt() {
         return dt;
@@ -22,13 +30,6 @@ public class FullSummaryElem {
         this.pt_in = pt_in;
     }
 
-    public Double getWt_in() {
-        return wt_in;
-    }
-
-    public void setWt_in(Double wt_in) {
-        this.wt_in = wt_in;
-    }
 
     public Double getCbh_in() {
         return cbh_in;

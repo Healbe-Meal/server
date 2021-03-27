@@ -1,4 +1,6 @@
-package entities;
+package entities.response;
+
+import entities.descriptions.Description;
 
 import java.util.ArrayList;
 
@@ -19,5 +21,8 @@ public class ResultElem {
 
     public void addElem(Integer a, Double b) {
         elements.add(new Element(a, b));
+    }
+    public void addElem(Element a) {
+        elements.add(a);
     }
 }

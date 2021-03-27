@@ -1,49 +1,54 @@
 package entities;
 
-import entities.elements.FullSummaryElem;
-import entities.elements.ShortSummaryElem;
-import entities.elements.SleepDataElem;
-import entities.elements.WeightElem;
+import entities.elements.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Inf {
-    private List<ShortSummaryElem> short_summary = new ArrayList<>();
-    private List<WeightElem> weight = new ArrayList<>();
-    private List<FullSummaryElem> full_summary = new ArrayList<>();
-    private List<SleepDataElem> sleep_data = new ArrayList<>();
+    private ArrayList<ShortSummaryElem> short_summary;
+    private ArrayList<WeightElem> weight;
+    private ArrayList<FullSummaryElem> full_summary;
+    private ArrayList<SleepDataElem> sleep_data;
+    private ArrayList<UserElement> user;
 
-    public List<SleepDataElem> getSleep_data() {
-        return sleep_data;
-    }
-
-    public void setSleep_data(List<SleepDataElem> sleep_data) {
-        this.sleep_data = sleep_data;
-    }
-
-    public List<FullSummaryElem> getFull_summary() {
-        return full_summary;
-    }
-
-    public void setFull_summary(List<FullSummaryElem> full_summary) {
-        this.full_summary = full_summary;
-    }
-
-    public List<ShortSummaryElem> getShort_summary() {
+    public ArrayList<ShortSummaryElem> getShort_summary() {
         return short_summary;
     }
 
-    public void setShort_summary(List<ShortSummaryElem> short_summary) {
+    public void setShort_summary(ArrayList<ShortSummaryElem> short_summary) {
         this.short_summary = short_summary;
     }
 
-    public List<WeightElem> getWeight() {
+    public ArrayList<WeightElem> getWeight() {
         return weight;
     }
 
-    public void setWeight(List<WeightElem> weight) {
+    public void setWeight(ArrayList<WeightElem> weight) {
         this.weight = weight;
     }
 
+    public ArrayList<FullSummaryElem> getFull_summary() {
+        return full_summary;
+    }
+
+    public void setFull_summary(ArrayList<FullSummaryElem> full_summary) {
+        this.full_summary = full_summary;
+    }
+
+    public ArrayList<SleepDataElem> getSleep_data() {
+        return sleep_data;
+    }
+
+    public void setSleep_data(ArrayList<SleepDataElem> sleep_data) {
+        this.sleep_data = sleep_data;
+    }
+
+    public ArrayList<UserElement> getUser() {
+        return user;
+    }
+
+    public void setUser(ArrayList<UserElement> user) {
+        this.user = user;
+    }
 }

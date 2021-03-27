@@ -1,23 +1,21 @@
 package entities.descriptions;
 
-import entities.Description;
-
 public class EnergyOutDescription extends Description {
-    private Double energyOut;
+    private Double y;
     private Integer pulse;
 
-    public EnergyOutDescription(String time, Double energyOut, Integer pulse) {
-        super(time);
-        this.energyOut = energyOut;
+    public EnergyOutDescription(String x, Double y, Integer pulse) {
+        super(x);
+        this.y = y;
         this.pulse = pulse;
     }
 
-    public Double getEnergyOut() {
-        return energyOut;
+    public Double getY() {
+        return y;
     }
 
-    public void setEnergyOut(Double energyOut) {
-        this.energyOut = energyOut;
+    public void setY(Double y) {
+        this.y = y;
     }
 
     public Integer getPulse() {

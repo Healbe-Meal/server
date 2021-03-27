@@ -1,20 +1,18 @@
 package entities.descriptions;
 
-import entities.Description;
-
 public class StepsDescription  extends Description {
-    Integer steps;
+    Integer y;
 
-    public Integer getSteps() {
-        return steps;
+    public StepsDescription(String x, Integer y) {
+        super(x);
+        this.y = y;
     }
 
-    public void setSteps(Integer steps) {
-        this.steps = steps;
+    public Integer getY() {
+        return y;
     }
 
-    public StepsDescription(String time, Integer steps) {
-        super(time);
-        this.steps = steps;
+    public void setY(Integer y) {
+        this.y = y;
     }
 }
