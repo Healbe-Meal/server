@@ -25,10 +25,8 @@ public class Parser {
 //        return new ResponseEntity<>(service.getFinalJSON(inf), HttpStatus.OK);
 //    }
 
-    @PostMapping(value = "/parse",
-            consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
-
-    public void parse(@RequestParam("file")MultipartFile file) throws IOException, ParseException {
+    @PostMapping("/parse")
+    public void parse(@RequestParam("file") MultipartFile file) throws IOException, ParseException {
         byte[] bytes = file.getBytes();
 
         String content = new String(bytes);
@@ -43,3 +41,4 @@ public class Parser {
         return "Hello world";
     }
 }
+
