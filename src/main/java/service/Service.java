@@ -70,15 +70,15 @@ public class Service {
         parseWeight(inf.getWeight());
         parseUserInfo(inf.getUser());
 
-        result.setEnergyIn(energyIntakeForMonth.getResultByMonth());
-        result.setHeartRate(heartRateForMonth.getResultByMonth());
-        result.setEnergyOut(energyBurnedForMonth.getResultByMonth());
-        result.setSteps(stepsForMonth.getResultByMonth());
+        result.setEnergyIn(energyIntakeForMonth);
+        result.setHeartRate(heartRateForMonth);
+        result.setEnergyOut(energyBurnedForMonth);
+        result.setSteps(stepsForMonth);
         result.setUser(userInfo);
-        result.setPfcInfo(pfcForMonth.getResultByMonth());
+        result.setPfcInfo(pfcForMonth);
         standartResult = new StandartResult(standart.countEnergyInStandart(userWeight, userAge, userSex), standart.countIMT(userWeight, userHeight));
         result.setStandartResult(standartResult);
-        result.setWeight(weightForMonth.getResultByMonth());
+        result.setWeight(weightForMonth);
 
         return result;
     }
