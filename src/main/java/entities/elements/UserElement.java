@@ -4,64 +4,65 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserElement {
     @JsonProperty("UserHeight")
-    Integer userHeight;
+    Integer UserHeight;
     @JsonProperty("UserBirthdayDay")
-    Integer userBirthdayDay;
+    Integer UserBirthdayDay;
     @JsonProperty("UserBirthdayMonth")
-    Integer userBirthdayMonth;
+    Integer UserBirthdayMonth;
     @JsonProperty("UserBirthdayYear")
-    Integer userBirthdayYear;
+    Integer UserBirthdayYear;
     @JsonProperty("UserStepLength")
-    Integer userStepLength;
+    Integer UserStepLength;
     @JsonProperty("UserSex")
-    Boolean userSex;
+    Boolean UserSex;
 
     public Integer getUserHeight() {
-        return userHeight;
+        return UserHeight;
     }
 
     public void setUserHeight(Integer userHeight) {
-        this.userHeight = userHeight;
+        UserHeight = userHeight;
     }
 
-
     public Integer getUserBirthdayDay() {
-        return userBirthdayDay;
+        return UserBirthdayDay;
     }
 
     public void setUserBirthdayDay(Integer userBirthdayDay) {
-        this.userBirthdayDay = userBirthdayDay;
+        UserBirthdayDay = userBirthdayDay;
     }
 
     public Integer getUserBirthdayMonth() {
-        return userBirthdayMonth;
+        return UserBirthdayMonth;
     }
 
     public void setUserBirthdayMonth(Integer userBirthdayMonth) {
-        this.userBirthdayMonth = userBirthdayMonth;
+        UserBirthdayMonth = userBirthdayMonth;
     }
 
     public Integer getUserBirthdayYear() {
-        return userBirthdayYear;
+        return UserBirthdayYear;
     }
 
     public void setUserBirthdayYear(Integer userBirthdayYear) {
-        this.userBirthdayYear = userBirthdayYear;
+        UserBirthdayYear = userBirthdayYear;
     }
 
     public Integer getUserStepLength() {
-        return userStepLength;
+        return UserStepLength;
     }
 
     public void setUserStepLength(Integer userStepLength) {
-        this.userStepLength = userStepLength;
+        UserStepLength = userStepLength;
     }
 
     public Boolean getUserSex() {
-        return userSex;
+        return UserSex;
     }
 
     public void setUserSex(Boolean userSex) {
-        this.userSex = userSex;
+        UserSex = userSex;
     }
 }
+
+

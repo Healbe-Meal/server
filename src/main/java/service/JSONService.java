@@ -3,6 +3,8 @@ package service;
 
 import java.io.IOException;
 import java.util.List;
+import com.google.gson.Gson;
+
 
 import entities.Inf;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,9 @@ public class JSONService {
     public Inf getJson(String data) {
         Inf infJson = new Inf();
 
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            infJson = objectMapper.readValue(data, Inf.class);
-        } catch (IOException err) {
-            System.out.printf("Error", err.toString());
-        }
+        Gson gson = new Gson();
+        infJson = gson.fromJson(data, Inf.class);
+
 
         return infJson;
     }

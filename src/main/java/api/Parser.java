@@ -18,12 +18,24 @@ import java.util.List;
 
 @RestController
 public class Parser {
+//
+//    @PostMapping(value = "/parse")
+//    public ResponseEntity<Object> parse(@RequestBody Inf inf) throws IOException, ParseException {
+//        Service service = new Service();
+//        return new ResponseEntity<>(service.getFinalJSON(inf), HttpStatus.OK);
+//    }
 
     @PostMapping(value = "/parse")
-    public ResponseEntity<Object> parse(@RequestBody Inf inf) throws IOException, ParseException {
+    public ResponseEntity<Object> parse(@RequestParam("file")MultipartFile file) throws IOException, ParseException {
         Service service = new Service();
+        byte[] bytes = file.getBytes();
+
+        JSONService jsonService = new JSONService();
+        Inf inf = jsonService.getJson(new String(bytes, StandardCharsets.UTF_8));
+
         return new ResponseEntity<>(service.getFinalJSON(inf), HttpStatus.OK);
     }
+
 
 
 
