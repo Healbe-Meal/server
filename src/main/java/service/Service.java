@@ -6,6 +6,7 @@ import entities.descriptions.*;
 import entities.elements.*;
 import entities.response.*;
 
+import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,7 +67,7 @@ public class Service {
 
         parseShortSummary(inf.getShort_summary());
         parseFullSummary(inf.getFull_summary());
-        parseSleepData(inf.getSleep_data());
+        //parseSleepData(inf.getSleep_data());
         parseWeight(inf.getWeight());
         parseUserInfo(inf.getUser());
 
@@ -84,11 +85,18 @@ public class Service {
     }
 
     public void parseShortSummary(List<ShortSummaryElem> shortSummary) throws java.text.ParseException {
+        Collections.sort(shortSummary);
+        String prevHour = "";
+        Double energyInForHour = 0.0;
+        Double energyOutForHour = 0.0;
+        Integer stepsForHour = 0;
         int length = shortSummary.size();
         for (int i = 0; i < length; i++) {
             Double energy_in = shortSummary.get(i).getEnergy_in();
             Double energy_out = shortSummary.get(i).getEnergy_out();
             Integer heart_rate = shortSummary.get(i).getHeart_rate();
+            Integer stepsIn = shortSummary.get(i).getSteps();
+
             String stringDate = shortSummary.get(i).getAdd_date();
 
             Date date = dateFormatter.parse(stringDate);
@@ -96,23 +104,30 @@ public class Service {
             Integer day = Integer.parseInt(dayFormatter.format(date));
             String month = monthFormatter.format(date);
 
+            System.out.println(stringDate);
+
             if (!prevTime.equals(time)) {
-                if (energy_in != 0) {
-                    energyInDescription.add(new EnergyInDescription(time, energy_in, heart_rate));
+                String currentHour = time.substring(0, 2);
+                if (!currentHour.equals(prevHour) && !prevHour.equals("")) {
+                    energyInDescription.add(new EnergyInDescription(prevHour, energyInForHour, heart_rate));
+
+                    energyOutDescription.add(new EnergyOutDescription(prevHour, energyOutForHour, heart_rate));
+
+                    stepsDescription.add(new StepsDescription(prevHour, stepsForHour));
+
+                    heartRateDescription.add(new HeartRateDescription(prevHour, heart_rate));
+
+                    energyInForHour = 0.0;
+                    energyOutForHour = 0.0;
+                    stepsForHour = 0;
                 }
 
-                if (energy_out != 0) {
-                    energyOutDescription.add(new EnergyOutDescription(time, energy_out, heart_rate));
-                }
-
-                if (steps != 0) {
-                    stepsDescription.add(new StepsDescription(time, steps));
-                }
-
-                if (heart_rate != 0) {
-                    heartRateDescription.add(new HeartRateDescription(time, heart_rate));
-                }
+                prevHour = currentHour;
             }
+
+            energyInForHour += energy_in;
+            energyOutForHour += energy_out;
+            stepsForHour += stepsIn;
 
             if ((!day.equals(prevDateDay) && prevDateDay != 0) || i == length - 1) {
                 avgHeartRate /= count;
@@ -124,6 +139,8 @@ public class Service {
                 stepsForDay.addElem(prevDateDay, (double) steps, stepsDescription);
 
                 heartRateForDay.addElem(prevDateDay, (double) Math.round(avgHeartRate), heartRateDescription);
+
+                resetDescriptions();
 
                 if (!month.equals(prevDateMonth) || i == (length - 1)) {
                     energyIntakeForMonth.addElem(prevDateMonth, energyConsumedForDay);
@@ -164,6 +181,20 @@ public class Service {
     }
 
     public int getDay(String dt) {
+        Date reference = null;
+        Date time = null;
+        String testTime = dt.split(" ")[1];
+
+        try {
+            reference = timeFormatter.parse("00:00:00");
+            time = timeFormatter.parse(testTime);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long seconds = (time.getTime() - reference.getTime()) / 1000L;
+
         Date date = null;
         try {
             date = dateFormatter.parse(dt);
@@ -172,11 +203,11 @@ public class Service {
         }
         int month = Integer.parseInt(monthFormatter.format(date));
 
-        return Integer.parseInt(dayFormatter.format(date)) + (month * 30);
+        return Integer.parseInt(dayFormatter.format(date)) + (month * 30) + (int) seconds;
     }
 
     public void parseFullSummary(List<FullSummaryElem> fullSummary) throws java.text.ParseException {
-        Collections.sort(fullSummary, (a, b) -> Integer.compare(getDay(a.getDt()), (getDay(b.getDt()))));
+        Collections.sort(fullSummary, Comparator.comparingInt(a -> getDay(a.getDt())));
         int length = fullSummary.size();
         prevDateDay = 0;
         for (int i = 0; i < length; i++) {
@@ -219,7 +250,6 @@ public class Service {
     }
 
     public void parseSleepData(List<SleepDataElem> sleepData) throws java.text.ParseException {
-
         int length = sleepData.size();
         for (int i = 0; i < length; i++) {
             Integer timeInBed = sleepData.get(i).getTotal_time_in_bed();
@@ -253,6 +283,15 @@ public class Service {
             prevSleepTime = timeInBed;
         }
     }
+
+    private void resetDescriptions() {
+        energyInDescription = new ArrayList<>();
+        energyOutDescription = new ArrayList<>();
+        stepsDescription = new ArrayList<>();
+        heartRateDescription = new ArrayList<>();
+        pfcDescription = new ArrayList<>();
+    }
+
 
     private void resetValues() {
         energyConsumedForDay = new ResultElem();
