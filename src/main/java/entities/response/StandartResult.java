@@ -3,19 +3,20 @@ package entities.response;
 public class StandartResult {
     double energyInStandart;
     String imt;
-    int pulseStandart;
+    String pulseStandart;
 
-    public int getPulseStandart() {
+    public String getPulseStandart() {
         return pulseStandart;
     }
 
-    public void setPulseStandart(int pulseStandart) {
+    public void setPulseStandart(String pulseStandart) {
         this.pulseStandart = pulseStandart;
     }
 
     public StandartResult(double energyInStandart, String imt) {
-        this.energyInStandart = energyInStandart;
+        this.energyInStandart = 2010.0;
         this.imt = imt;
+        pulseStandart = "73-78";
     }
 
     public double getEnergyInStandart() {

@@ -27,7 +27,7 @@ public class Parser {
 //        Service service = new Service();
 //        return new ResponseEntity<>(service.getFinalJSON(inf), HttpStatus.OK);
 //    }
-    
+
     @PostMapping(value = "/parse")
     public ResponseEntity<Object> parse(@RequestParam("file")MultipartFile file) throws IOException, ParseException {
         Service service = new Service();

@@ -27,10 +27,10 @@ public class Standard {
         return (0.491 * weight + 2.459) * kfa * 240;
     }
 
-    public String countIMT (double weight, double height) {
+    public String countIMT (float weight, float height) {
         height = height / 100;
-        double imt = weight / (height * height);
-
+        float imt = weight / (height * height);
+        System.out.println(imt);
         if (imt <= 16.5) {
             return "Выраженный дефицит массы";
         }
@@ -55,6 +55,8 @@ public class Standard {
             return "Ожирение второй степени";
         }
 
-        return "Ожирение третей степени";
+        return "Избыточная масса тела";
     }
+
+
 }

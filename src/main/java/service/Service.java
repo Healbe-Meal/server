@@ -210,6 +210,7 @@ public class Service {
         Collections.sort(fullSummary, Comparator.comparingInt(a -> getDay(a.getDt())));
         int length = fullSummary.size();
         prevDateDay = 0;
+        prevDateMonth = "";
         for (int i = 0; i < length; i++) {
             Double proteinIn = fullSummary.get(i).getPt_in();
             Double cbhIn = fullSummary.get(i).getCbh_in();
