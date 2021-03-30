@@ -71,15 +71,15 @@ public class Service {
         parseWeight(inf.getWeight());
         parseUserInfo(inf.getUser());
 
-        result.setEnergyIn(energyIntakeForMonth);
-        result.setHeartRate(heartRateForMonth);
-        result.setEnergyOut(energyBurnedForMonth);
-        result.setSteps(stepsForMonth);
+        result.setEnergyIn(energyConsumedForDay.getElements());
+        result.setHeartRate(heartRateForDay.getElements());
+        result.setEnergyOut(energyBurnedForDay.getElements());
+        result.setSteps(stepsForDay.getElements());
         result.setUser(userInfo);
-        result.setPfcInfo(pfcForMonth);
+        result.setPfcInfo(pfcForDay.getElements());
         standartResult = new StandartResult(standart.countEnergyInStandart(userWeight, userAge, userSex), standart.countIMT(userWeight, userHeight));
         result.setStandartResult(standartResult);
-        result.setWeight(weightForMonth);
+        result.setWeight(weightForDay.getElements());
 
         return result;
     }
@@ -147,8 +147,8 @@ public class Service {
                     energyBurnedForMonth.addElem(prevDateMonth, energyBurnedForDay);
                     stepsForMonth.addElem(prevDateMonth, stepsForDay);
                     heartRateForMonth.addElem(prevDateMonth, heartRateForDay);
-
-                    resetValues();
+                    break;
+                    //resetValues();
                 }
 
                 energyIntake = 0;
@@ -238,7 +238,9 @@ public class Service {
 
                 if (!month.equals(prevDateMonth) || i == (length - 1)) {
                     pfcForMonth.addElem(prevDateMonth, pfcForDay);
-                    pfcForDay = new ResultElem();
+                    //pfcForDay = new ResultElem();
+
+                    break;
                 }
 
             }
@@ -323,7 +325,9 @@ public class Service {
                 if (!prevDateMonth.equals(month) || i == length - 1) {
                     weightForMonth.addElem(prevDateMonth, weightForDay);
 
-                    weightForDay = new ResultElem();
+                   //weightForDay = new ResultElem();
+
+                    break;
                 }
 
             }

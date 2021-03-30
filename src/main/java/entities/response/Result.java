@@ -3,52 +3,52 @@ package entities.response;
 import java.util.*;
 
 public class Result {
-    ForMonth energyIn;
-    ForMonth energyOut;
-    ForMonth heartRate;
-    ForMonth steps ;
-    ForMonth weight;
+    ArrayList<Element> energyIn;
+    ArrayList<Element> energyOut;
+    ArrayList<Element> heartRate;
+    ArrayList<Element> steps ;
+    ArrayList<Element> weight;
     UserInfo user;
     StandartResult standartResult;
-    ForMonth pfcInfo;
+    ArrayList<Element> pfcInfo;
 
-    public ForMonth getEnergyIn() {
+    public ArrayList<Element> getEnergyIn() {
         return energyIn;
     }
 
-    public void setEnergyIn(ForMonth energyIn) {
+    public void setEnergyIn(ArrayList<Element> energyIn) {
         this.energyIn = energyIn;
     }
 
-    public ForMonth getEnergyOut() {
+    public ArrayList<Element> getEnergyOut() {
         return energyOut;
     }
 
-    public void setEnergyOut(ForMonth energyOut) {
+    public void setEnergyOut(ArrayList<Element> energyOut) {
         this.energyOut = energyOut;
     }
 
-    public ForMonth getHeartRate() {
+    public ArrayList<Element> getHeartRate() {
         return heartRate;
     }
 
-    public void setHeartRate(ForMonth heartRate) {
+    public void setHeartRate(ArrayList<Element> heartRate) {
         this.heartRate = heartRate;
     }
 
-    public ForMonth getSteps() {
+    public ArrayList<Element> getSteps() {
         return steps;
     }
 
-    public void setSteps(ForMonth steps) {
+    public void setSteps(ArrayList<Element> steps) {
         this.steps = steps;
     }
 
-    public ForMonth getWeight() {
+    public ArrayList<Element> getWeight() {
         return weight;
     }
 
-    public void setWeight(ForMonth weight) {
+    public void setWeight(ArrayList<Element> weight) {
         this.weight = weight;
     }
 
@@ -68,11 +68,11 @@ public class Result {
         this.standartResult = standartResult;
     }
 
-    public ForMonth getPfcInfo() {
+    public ArrayList<Element> getPfcInfo() {
         return pfcInfo;
     }
 
-    public void setPfcInfo(ForMonth pfcInfo) {
+    public void setPfcInfo(ArrayList<Element> pfcInfo) {
         this.pfcInfo = pfcInfo;
     }
 }
