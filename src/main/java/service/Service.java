@@ -8,9 +8,12 @@ import entities.response.*;
 
 import javax.sound.midi.Soundbank;
 import java.io.IOException;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static java.util.Calendar.*;
 
 public class Service {
     private double energyBurned = 0;
@@ -80,7 +83,7 @@ public class Service {
         standartResult = new StandartResult(standart.countEnergyInStandart(userWeight, userAge, userSex), standart.countIMT(userWeight, userHeight));
         result.setStandartResult(standartResult);
         result.setWeight(weightForDay.getElements());
-
+        result.setMonth(new MonthInfo());
         return result;
     }
 
@@ -364,5 +367,7 @@ public class Service {
             userInfo = new UserInfo(height, birthdayDay, birthdayMonth, birthdayYear, stepLength, sex);
         }
     }
+
+
 
 }

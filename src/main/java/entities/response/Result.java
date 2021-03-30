@@ -8,9 +8,18 @@ public class Result {
     ArrayList<Element> heartRate;
     ArrayList<Element> steps ;
     ArrayList<Element> weight;
+    MonthInfo month;
     UserInfo user;
     StandartResult standartResult;
     ArrayList<Element> pfcInfo;
+
+    public MonthInfo getMonth() {
+        return month;
+    }
+
+    public void setMonth(MonthInfo month) {
+        this.month = month;
+    }
 
     public ArrayList<Element> getEnergyIn() {
         return energyIn;
